@@ -16,14 +16,13 @@ import { red } from '@mui/material/colors';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import BasicModal from './alert';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import DeleteUser from './delteuser';
+
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { signupUser } from '../../redux/redux/action/signup.action';
 import { showModal } from '../../redux/redux/action/showmodal.action';
 import { userID } from '../../redux/redux/action/updateid.action';
+import { useNavigate } from 'react-router-dom';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -61,16 +60,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function CustomizedTables() {
-
+ const navigate = useNavigate()
   const dispatch = useDispatch();
    const togg= useSelector(state=> state.user.showmodal)
-  const colorred = red[500];
+
   const [reload,setreload] = useState(false);
  
  
   useEffect(()=>{
     const fetched=fetchuser();
-    funcdel();
     
   },[reload])
 
@@ -83,29 +81,31 @@ const fetchuser = async ()=>{
     console.log(resjson);
     return resjson;
 }
-function deleteconfirm(id){
+ function deleteconfirm(id){
+  
   let res=window.confirm("are you sure you want to delete")
   if(res){
-    funcdel(id)
+     funcdel(id)
   }
 }
- async function funcdel(id){
- 
-
-  axios.delete(`http://localhost:8085/user/deletebyid/`+id)
-    .then(response => {
-     // setreload(!reload)
-     
-    console.log(togg)
-    // dispatch(showModal(!togg))
+ const  funcdel=async (id)=>{
+ console.log("called")
+ try{
+  console.log(`http://localhost:8085/user/deletebyid/`+id)
+   const response= await axios.delete(`http://localhost:8085/user/deletebyid/`+id)
+   console.log(`http://localhost:8085/user/deletebyid/`+id)
+   
+     console.log(response)
+    
     setreload(!reload)
-     console.log(togg)
   
-    })
-    .catch(error => {
-     
+    }
+    //.catch(error => {
+     catch(error){
       console.error(error);
-    });
+      //alert("error")
+  // navigate("login")
+    }
    }
 
   const monsters=useSelector(state=>state.user.monsters)
@@ -145,11 +145,11 @@ function deleteconfirm(id){
                   dispatch(userID(itr))
                   dispatch(showModal(true))
               }}><EditIcon/></Button></StyledTableCell>
-              <StyledTableCell align="right"><Button variant="outlined" color="error" onClick={()=>
-                {
-                 
-                deleteconfirm(itr?.id)}
+              <StyledTableCell align="right"><Button variant="outlined" color="error" onClick={()=>{
                 
+                console.log("omago")
+                deleteconfirm(itr.id)
+              }
                 }><DeleteIcon/></Button></StyledTableCell>
              
 

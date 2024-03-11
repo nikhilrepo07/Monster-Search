@@ -4,7 +4,7 @@ import "./App.css"
 import  Signup  from "./components/signup"
 import { Login } from "./components/login"
 import {  Route,BrowserRouter as Router, Routes } from "react-router-dom";
-import Home from "./components/container"
+import Home from "./components/container";
 import { Provider } from "react-redux";
 import store from "./redux/redux";
 

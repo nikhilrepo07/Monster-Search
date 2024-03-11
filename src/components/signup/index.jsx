@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box';
+
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -7,7 +7,7 @@ import { Component } from 'react';
 import React from 'react';
 import axios from 'axios';
 import CustomizedTables from '../users';
-import SignModal from '../users/alert';
+
 
 
 class Signup extends Component{
@@ -29,7 +29,7 @@ handleChange(event) {
 }
 handleSubmit(event) {
     event.preventDefault()
-    const { userid, username, email, password ,toggle} = this.state
+    const { userid, username, email, password } = this.state
   
     try {
       
@@ -59,7 +59,7 @@ render() {
               <Grid item xs={6} style={{ paddingRight: '40px', paddingBottom: '40px' }}>
                   <Grid item xs={12}>
                       <Item>
-                          <TextField id="user-id" label="User Id" variant="outlined" name="userid" onChange={this.handleChange} value={this.state.user_id}/>
+                          <TextField id="user-id" label="User Id" variant="outlined" name="userid" onChange={this.handleChange} value={this.state.userid}/>
                       </Item>
                   </Grid>
                   <Grid item xs={12}>

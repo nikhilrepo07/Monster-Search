@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { showModal } from '../../redux/redux/action/showmodal.action';
 import axios from 'axios';
 import { useState } from 'react';
-import { signupUser } from '../../redux/redux/action/signup.action';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -27,10 +27,10 @@ export default function BasicModal() {
   const userdata= useSelector(state=> state.user.userid)
   const [open, setOpen] = React.useState(togg);
   const [userData, setUserData] = useState({
-    userid: userdata.userid,
-    username: userdata.username,
-    email: userdata.email,
-    password: userdata.password
+    userid: userdata?.userid,
+    username: userdata?.username,
+    email: userdata?.email,
+    password: userdata?.password
   });
  
   const handleChange = (e) => {
@@ -81,7 +81,7 @@ export default function BasicModal() {
             User Update form
           </Typography>
          
-         <Box  sx={{style}}>
+         <Box>
           <TextField label="object Id" color="secondary" focused value={userdata.id} name="id" onChange={handleChange}/>
           <TextField label="user id" color="secondary" focused defaultValue={userdata.userid} name="userid" onChange={handleChange}/>
           
